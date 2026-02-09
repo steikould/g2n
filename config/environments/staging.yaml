@@ -1,0 +1,25 @@
+# G2N Staging Environment Configuration
+environment: staging
+
+s3:
+  bronze_path: s3a://g2n-staging/bronze/
+  silver_path: s3a://g2n-staging/silver/
+  quarantine_path: s3a://g2n-staging/quarantine/
+  features_path: s3a://g2n-staging/features/
+
+snowflake:
+  warehouse: G2N_STAGING_WH
+  database: G2N_STAGING
+  schema: PUBLIC
+
+mlflow:
+  tracking_uri: http://mlflow-staging.internal:5000
+  experiment_name: g2n-staging
+
+quality_gate:
+  critical_threshold: 40.0
+
+serving:
+  host: 0.0.0.0
+  port: 8000
+  reload: false

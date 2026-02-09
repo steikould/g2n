@@ -1,0 +1,15 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY pyproject.toml .
+COPY src/ src/
+
+RUN pip install --no-cache-dir ".[dashboards]"
+
+EXPOSE 8501
+
+# Default to accrual health dashboard; override via env var DASHBOARD_APP
+ENV DASHBOARD_APP=src/g2n/dashboards/accrual_health.py
+
+CMD streamlit run $DASHBOARD_APP --server.port=8501 --server.address=0.0.0.0

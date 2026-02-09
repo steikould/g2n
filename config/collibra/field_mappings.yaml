@@ -1,0 +1,44 @@
+# Collibra asset type and field mappings for G2N integration
+#
+# Maps G2N concepts to Collibra asset types and attribute IDs.
+# Update these IDs to match your Collibra instance configuration.
+
+asset_types:
+  feature:
+    type_id: "00000000-0000-0000-0000-000000000001"  # Replace with actual
+    name: "ML Feature"
+  data_quality_rule:
+    type_id: "00000000-0000-0000-0000-000000000002"  # Replace with actual
+    name: "Data Quality Rule"
+  data_product:
+    type_id: "00000000-0000-0000-0000-000000000003"  # Replace with actual
+    name: "Data Product"
+  model:
+    type_id: "00000000-0000-0000-0000-000000000004"  # Replace with actual
+    name: "ML Model"
+
+attribute_types:
+  definition:
+    type_id: "00000000-0000-0000-0001-000000000001"
+  computation_logic:
+    type_id: "00000000-0000-0000-0001-000000000002"
+  version:
+    type_id: "00000000-0000-0000-0001-000000000003"
+  source_lineage:
+    type_id: "00000000-0000-0000-0001-000000000004"
+
+relation_types:
+  data_flow:
+    type_id: "00000000-0000-0000-0002-000000000001"
+  consumes_from:
+    type_id: "00000000-0000-0000-0002-000000000002"
+  produces_for:
+    type_id: "00000000-0000-0000-0002-000000000003"
+
+domains:
+  g2n_features:
+    domain_id: ""  # Set per environment
+  g2n_data_quality:
+    domain_id: ""  # Set per environment
+  g2n_models:
+    domain_id: ""  # Set per environment

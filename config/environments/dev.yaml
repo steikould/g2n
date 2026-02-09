@@ -1,0 +1,25 @@
+# G2N Development Environment Configuration
+environment: dev
+
+s3:
+  bronze_path: s3a://g2n-dev/bronze/
+  silver_path: s3a://g2n-dev/silver/
+  quarantine_path: s3a://g2n-dev/quarantine/
+  features_path: s3a://g2n-dev/features/
+
+snowflake:
+  warehouse: G2N_DEV_WH
+  database: G2N_DEV
+  schema: PUBLIC
+
+mlflow:
+  tracking_uri: http://mlflow-dev.internal:5000
+  experiment_name: g2n-dev
+
+quality_gate:
+  critical_threshold: 30.0  # more lenient in dev
+
+serving:
+  host: 0.0.0.0
+  port: 8000
+  reload: true

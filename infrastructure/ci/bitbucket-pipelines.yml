@@ -1,0 +1,80 @@
+# Bitbucket Pipelines CI/CD for G2N
+# Stages: lint → test → build → deploy
+
+image: python:3.10
+
+definitions:
+  caches:
+    pip: ~/.cache/pip
+
+pipelines:
+  default:
+    - step:
+        name: Lint & Type Check
+        caches:
+          - pip
+        script:
+          - pip install ".[dev]"
+          - ruff check src/
+          - mypy src/g2n/
+
+    - step:
+        name: Unit Tests
+        caches:
+          - pip
+        script:
+          - pip install ".[all]"
+          - pytest tests/unit/ -v --cov=g2n --cov-report=xml
+        artifacts:
+          - coverage.xml
+
+    - step:
+        name: Integration Tests
+        caches:
+          - pip
+        script:
+          - pip install ".[all]"
+          - pytest tests/integration/ -v -m integration
+        trigger: manual
+
+  branches:
+    main:
+      - step:
+          name: Lint & Test
+          caches:
+            - pip
+          script:
+            - pip install ".[all]"
+            - ruff check src/
+            - pytest tests/unit/ -v
+
+      - step:
+          name: Build Serving Image
+          services:
+            - docker
+          script:
+            - docker build -f infrastructure/docker/Dockerfile.serving -t g2n-serving:${BITBUCKET_COMMIT} .
+            - docker tag g2n-serving:${BITBUCKET_COMMIT} g2n-serving:latest
+
+      - step:
+          name: Build Dashboard Image
+          services:
+            - docker
+          script:
+            - docker build -f infrastructure/docker/Dockerfile.dashboard -t g2n-dashboard:${BITBUCKET_COMMIT} .
+
+      - step:
+          name: Deploy to Staging
+          trigger: manual
+          deployment: staging
+          script:
+            - echo "Deploy to staging OpenShift cluster"
+            - oc apply -k infrastructure/openshift/overlays/dev/
+
+      - step:
+          name: Deploy to Production
+          trigger: manual
+          deployment: production
+          script:
+            - echo "Deploy to production OpenShift cluster"
+            - oc apply -k infrastructure/openshift/overlays/prod/

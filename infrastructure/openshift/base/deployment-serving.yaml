@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: g2n-serving
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: g2n
+      component: serving
+  template:
+    metadata:
+      labels:
+        app: g2n
+        component: serving
+    spec:
+      containers:
+        - name: serving
+          image: g2n-serving:latest
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: g2n-secrets
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"

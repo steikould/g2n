@@ -1,0 +1,49 @@
+{
+  "expectation_suite_name": "g2n_silver_suite",
+  "ge_cloud_id": null,
+  "expectations": [
+    {
+      "expectation_type": "expect_column_to_exist",
+      "kwargs": {"column": "transaction_id"},
+      "meta": {"dimension": "validity"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {"column": "transaction_id"},
+      "meta": {"dimension": "completeness"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {"column": "transaction_id"},
+      "meta": {"dimension": "uniqueness"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {"column": "customer_id"},
+      "meta": {"dimension": "completeness"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {"column": "product_id"},
+      "meta": {"dimension": "completeness"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {"column": "gross_amount", "min_value": 0},
+      "meta": {"dimension": "accuracy"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "kwargs": {"column": "quantity", "min_value": 1},
+      "meta": {"dimension": "accuracy"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {"column": "transaction_date"},
+      "meta": {"dimension": "completeness"}
+    }
+  ],
+  "meta": {
+    "description": "Silver layer quality expectations for G2N transaction data"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "expectation_suite_name": "g2n_features_suite",
+  "ge_cloud_id": null,
+  "expectations": [
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "kwargs": {"column": "customer_id"},
+      "meta": {"dimension": "completeness"}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_unique",
+      "kwargs": {"column": "customer_id"},
+      "meta": {"dimension": "uniqueness", "notes": "Features are per-customer"}
+    },
+    {
+      "expectation_type": "expect_table_row_count_to_be_between",
+      "kwargs": {"min_value": 1},
+      "meta": {"dimension": "completeness", "notes": "Feature table must not be empty"}
+    }
+  ],
+  "meta": {
+    "description": "Quality expectations for materialized feature tables"
+  }
+}

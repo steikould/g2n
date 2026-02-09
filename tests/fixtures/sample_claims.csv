@@ -1,0 +1,5 @@
+claim_number,wholesaler_id,member_id,product_code,agreement_number,submitted_date,invoice_ref,claimed_amount,processing_status,submit_count
+CLM-001,DIST-A,CUST-001,PROD-001,CTR-001,2026-01-20,TXN-001,500.00,pending,1
+CLM-002,DIST-A,CUST-002,PROD-002,CTR-002,2026-01-22,TXN-002,320.00,approved,1
+CLM-003,DIST-B,CUST-001,PROD-001,CTR-001,2026-01-25,TXN-003,750.00,pending,2
+CLM-004,DIST-A,CUST-003,PROD-003,,2026-01-28,TXN-004,180.00,rejected,1

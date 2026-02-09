@@ -1,0 +1,26 @@
+[
+  {
+    "agreement_id": "CTR-001",
+    "account_id": "CUST-001",
+    "material_group": "PROD-001",
+    "agreement_type": "rebate",
+    "start_date": "2026-01-01",
+    "end_date": "2026-12-31",
+    "num_tiers": 3,
+    "base_discount": 0.05,
+    "rebate_rate": 0.03,
+    "bundle_flag": "N"
+  },
+  {
+    "agreement_id": "CTR-002",
+    "account_id": "CUST-002",
+    "material_group": "PROD-002",
+    "agreement_type": "chargeback",
+    "start_date": "2026-01-01",
+    "end_date": "2026-06-30",
+    "num_tiers": 2,
+    "base_discount": 0.08,
+    "rebate_rate": 0.0,
+    "bundle_flag": "Y"
+  }
+]
